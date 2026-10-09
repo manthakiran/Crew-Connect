@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Add Designation</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label>Designation Name</label>
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   placeholder="Enter Designation name"
+                   value="{{ designation.name|default:'' }}"
+                   required>
+        </div>
+
+        <div class="form-check mb-4">
+
+
+                    <input
+                        type="checkbox"
+                        name="status"
+                        class="form-check-input"
+                        id="status"
+
+
+                        {% if not is_update or designation.status %}
+                            checked
+                        {% endif %}
+                    >
+
+
+                    <label
+                        class="form-check-label"
+                        for="status"
+                    >
+                        Active
+                    </label>
+
+
+                </div>
+
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+
+        <a href="{% url 'designations_list' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}
